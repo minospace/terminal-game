@@ -23,6 +23,12 @@ struct TGame: ParsableCommand {
     
     mutating func run() throws {
         Space()
+        print("welcome to 'terminal game' or TG")
+        Space()
+        print("you can change the default name 'TG' to something else")
+        print("by going into the file 'Package' and changing the first 'name: TG and the TG in executableTarget..")
+        
+        Space()
         while play != 0 && health > 0.0{
             if enemy{
                 ehealth = 5.0
