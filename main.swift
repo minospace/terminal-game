@@ -16,6 +16,8 @@ struct TGame: ParsableCommand {
     var enemy = true
     var attack: Double = 1.5
     var health: Double = 10.0
+    var level: Int = 0
+    var xp: Double = 0.0
     var ehealth: Double = 5.0
     var eattack: Double = 1.0
     
@@ -53,21 +55,35 @@ struct TGame: ParsableCommand {
             print("welcome to home")
             print("<——🏠——>")
             
-            print("——[i: open invertory")
-            print("——[c: open character")
-            print("——[L: save & quit")
-            print("[i, c, L]:")
+            print("——[i: open invertory]")
+            print("——[c: open character]")
+            print("——[L: save & quit]")
+            print("[i, c, L]: ")
             
             if let input = readLine(){
                 if input.lowercased() == "i"{
                     Space()
-                    print("inventory OPEN")
+                    print(inventory)
                     Space()
+                    print("see everything in inventory? [y/n]: ")
+                    print("you will see graphics of each object")
+                    if let input = readLine(){
+                        if input.lowercased() == "y"{
+                            for (key, value) in inventory {
+                                if key == "flesh" {
+                                    graphics().flesh()
+                                }
+                            }
+                        }
+                    }
                 }
                 else if input.lowercased() == "c"{
+                    print("character:")
                     Space()
-                    print("character OPEN")
+                    graphics().character()
                     Space()
+                    print("you have \(xp) experience;")
+                    print("you are level \(level)")
                 }
             }
             
@@ -116,6 +132,12 @@ struct TGame: ParsableCommand {
                                     }
                                     else{
                                         inventory["flesh"] = 1
+                                    }
+                                    xp += 50
+                                    if xp >= 100{
+                                        level += 1
+                                        print("you are now level \(level)!!")
+                                        Space()
                                     }
                                     UserDefaults.standard.setValue(inventory, forKey: "inventory")
                                     Space()
