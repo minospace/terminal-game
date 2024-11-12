@@ -7,8 +7,6 @@ import Foundation
 struct TGame: ParsableCommand {
     static let configuration = CommandConfiguration(abstract: "Play a small game in the terminal", version: "0.0.2")
     
-    @Argument(help: "your name") var name: String = "bobby"
-    //@Flag(name: .short, help: "choose to fight") var fight: Bool = false
     @Argument(help: "how many times you would like to play") var play: Int = 1
     @Flag(name: .short, help: "debug help for developers") var deb: Bool = false
     @Flag(name: .short, help: "check inventory, character, etc..") var home: Bool = false
@@ -16,8 +14,8 @@ struct TGame: ParsableCommand {
     var enemy = true
     var attack: Double = 1.5
     var health: Double = 10.0
-    var level: Int = 0
-    var xp: Double = 0.0
+    var level: Int = UserDefaults.standard.integer(forKey: "level")
+    var xp: Double = UserDefaults.standard.double(forKey: "xp")
     var ehealth: Double = 5.0
     var eattack: Double = 1.0
     
@@ -139,6 +137,8 @@ struct TGame: ParsableCommand {
                                         print("you are now level \(level)!!")
                                         Space()
                                     }
+                                    UserDefaults.standard.setValue(xp, forKey: "xp")
+                                    UserDefaults.standard.setValue(level, forKey: "level")
                                     UserDefaults.standard.setValue(inventory, forKey: "inventory")
                                     Space()
                                     print("**1 flesh added to inventory**")
