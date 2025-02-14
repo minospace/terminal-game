@@ -1,3 +1,5 @@
+# important <-terminal game will switch from swift to bash soon, there will be less feautures but they will come back soon->
+
 # installation
 1. download files(the dmg)
 2. put file in a folder expample: "terminal game"
